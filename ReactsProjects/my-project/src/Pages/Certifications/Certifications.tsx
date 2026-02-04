@@ -48,15 +48,16 @@ const certifications = [
     description: "Modern JavaScript features and advanced programming concepts",
   },
   {
-    name: "Cloud Computing AWS",
-    issuer: "AWS",
+    name: "AI Essentials",
+    issuer: "Coursera",
     link: "#",
     date: "2024",
-    skills: ["AWS", "EC2", "S3", "Lambda"],
-    level: "Intermediate",
-    hours: "45 hours",
+    skills: ["Machine Learning", "Neural Networks", "AI Fundamentals", "Deep Learning"],
+    level: "Advanced",
+    hours: "50 hours",
     verified: true,
-    description: "Amazon Web Services fundamentals and cloud architecture principles",
+ 
+    description: "Comprehensive AI essentials course covering machine learning fundamentals and practical applications",
   },
   {
     name: "UI/UX Design Principles",
@@ -77,13 +78,13 @@ const AnimatedStars = () => {
       {[...Array(100)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-white rounded-full opacity-70"
+          className="absolute w-1 h-1 bg-white rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
-            opacity: [0.3, 1, 0.3],
+            opacity: [0.2, 1, 0.2],
             scale: [0.5, 1.2, 0.5],
           }}
           transition={{
@@ -105,14 +106,16 @@ const FloatingParticles = () => {
           key={i}
           className="absolute w-2 h-2 rounded-full"
           style={{
-            background: `linear-gradient(45deg, ${["#8B5CF6", "#EC4899", "#06B6D4"][i % 3]}, transparent)`,
+            background: `linear-gradient(45deg, ${
+              i % 3 === 0 ? "#8B5CF6" : i % 3 === 1 ? "#EC4899" : "#06B6D4"
+            }, transparent)`,
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [-20, -100],
+            y: [-20, -100, -20],
+            x: [0, Math.random() * 100 - 50, 0],
             opacity: [0, 1, 0],
-            scale: [0, 1, 0],
           }}
           transition={{
             duration: Math.random() * 10 + 10,
@@ -256,6 +259,13 @@ const Certifications = () => {
                     </motion.span>
                   ))}
                 </div>
+
+                {cert.credentialId && (
+                  <div className="mb-4 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
+                    <p className="text-xs text-gray-400 mb-1">Credential ID</p>
+                    <p className="text-xs font-mono text-purple-300">{cert.credentialId}</p>
+                  </div>
+                )}
 
                 <div className="flex items-center justify-between text-sm text-gray-400">
                   <span className="flex items-center gap-1">

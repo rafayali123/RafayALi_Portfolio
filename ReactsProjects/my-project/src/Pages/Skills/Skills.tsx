@@ -70,19 +70,23 @@ const FloatingParticles = () => {
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-purple-400 rounded-full opacity-60"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+          className="absolute w-2 h-2 rounded-full"
+          style={{
+            background: `linear-gradient(45deg, ${
+              i % 3 === 0 ? "#8B5CF6" : i % 3 === 1 ? "#EC4899" : "#06B6D4"
+            }, transparent)`,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
           }}
           animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            y: [-20, -100, -20],
+            x: [0, Math.random() * 100 - 50, 0],
+            opacity: [0, 1, 0],
           }}
           transition={{
             duration: Math.random() * 10 + 10,
             repeat: Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
+            delay: Math.random() * 5,
           }}
         />
       ))}
@@ -96,7 +100,7 @@ const AnimatedStars = () => {
       {[...Array(100)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-0.5 h-0.5 bg-white rounded-full"
+          className="absolute w-1 h-1 bg-white rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -286,7 +290,7 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          {["5+ Years", "50+ Projects", "∞ Learning"].map((badge, index) => (
+          {["2+ Years", "10+ Projects", "∞ Learning"].map((badge, index) => (
             <motion.div
               key={index}
               className="px-6 py-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-400/30 rounded-full text-purple-300 font-semibold"

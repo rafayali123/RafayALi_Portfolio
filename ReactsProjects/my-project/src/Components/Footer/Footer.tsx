@@ -3,13 +3,13 @@ import { motion } from "framer-motion"
 import {
   FaGithub,
   FaLinkedin,
-  FaTwitter,
   FaInstagram,
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
   FaHeart,
   FaRocket,
+  FaCheckCircle,
 } from "react-icons/fa"
 
 const Footer = () => {
@@ -44,12 +44,6 @@ const Footer = () => {
       href: "https://www.linkedin.com/in/syed-abdul-rafay-ali-8272b12a8/",
       label: "LinkedIn",
       color: "hover:text-blue-400",
-    },
-    {
-      icon: FaTwitter,
-      href: "https://twitter.com/rafayali",
-      label: "Twitter",
-      color: "hover:text-cyan-400",
     },
     {
       icon: FaInstagram,
@@ -102,7 +96,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative bg-black overflow-hidden">
+    <footer className="relative bg-black border-t border-purple-500/20 overflow-hidden">
       {/* Animated Stars Background */}
       <div className="absolute inset-0">
         {stars.map((star) => (
@@ -155,20 +149,20 @@ const Footer = () => {
       </div>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-purple-900/10 via-transparent to-transparent" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="sm:col-span-2 lg:col-span-2 text-center sm:text-left"
+            className="lg:col-span-1"
           >
             <motion.h3
-              className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-3 sm:mb-4"
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-4"
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
@@ -180,11 +174,11 @@ const Footer = () => {
             >
               Rafay Ali
             </motion.h3>
-            <p className="text-gray-300 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">
-              I'm a passionate Software Engineer and MERN Stack Developer who turns ideas into elegant code. Focused on building clean, scalable, and performant web applications.
+            <p className="text-gray-300 text-sm leading-relaxed mb-4">
+              Software Engineering student specializing in AI-integrated web applications built on the MERN stack.
             </p>
-            <div className="flex items-center justify-center sm:justify-start space-x-2 text-xs sm:text-sm text-gray-400">
-              <FaRocket className="text-purple-400" />
+            <div className="flex items-center space-x-2 text-purple-400 text-sm">
+              <FaRocket />
               <span>Building the future, one line of code at a time</span>
             </div>
           </motion.div>
@@ -194,18 +188,17 @@ const Footer = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center sm:text-left"
           >
-            <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="text-lg font-semibold text-white mb-6">Quick Links</h4>
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <motion.li key={link.name}>
                   <a
                     href={link.href}
                     onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center justify-center sm:justify-start group cursor-pointer text-sm sm:text-base"
+                    className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center group text-sm cursor-pointer"
                   >
-                    <motion.span className="w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mr-2 group-hover:w-4 transition-all duration-300" />
+                    <motion.span className="w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mr-3 group-hover:w-4 transition-all duration-300" />
                     {link.name}
                   </a>
                 </motion.li>
@@ -218,56 +211,61 @@ const Footer = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-center sm:text-left"
           >
-            <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Get In Touch</h4>
-            <ul className="space-y-3">
+            <h4 className="text-lg font-semibold text-white mb-6">Get In Touch</h4>
+            <ul className="space-y-4">
               {contactInfo.map((info, index) => (
                 <motion.li key={index}>
                   <a
                     href={info.href}
                     target={info.href.startsWith("http") ? "_blank" : undefined}
                     rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center justify-center sm:justify-start group"
+                    className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center group text-sm"
                   >
-                    <info.icon className="mr-3 text-purple-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" />
-                    <span className="text-xs sm:text-sm break-all sm:break-normal">{info.text}</span>
+                    <info.icon className="mr-3 text-purple-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0 w-5 h-5" />
+                    <span>{info.text}</span>
                   </a>
                 </motion.li>
               ))}
             </ul>
           </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="lg:col-span-1"
+          >
+            <h4 className="text-lg font-semibold text-white mb-6">Follow Me</h4>
+            <div className="flex gap-4">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-gray-400 ${social.color} transition-all duration-300 p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-400/25`}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  title={social.label}
+                >
+                  <social.icon size={20} />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex justify-center space-x-4 sm:space-x-6 mb-6 sm:mb-8"
-        >
-          {socialLinks.map((social) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`text-gray-400 ${social.color} transition-all duration-300 p-2 sm:p-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-400/25`}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <social.icon size={16} className="sm:w-5 sm:h-5" />
-            </motion.a>
-          ))}
-        </motion.div>
-
+        {/* Divider */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="border-t border-gray-800 pt-6 sm:pt-8 text-center"
+          className="pt-8 mt-8"
         >
-          <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
-            <p className="text-gray-400 text-xs sm:text-sm flex items-center justify-center">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+            <p className="text-gray-400 text-sm flex items-center justify-center md:justify-start">
               &copy; 2025 Rafay Ali. Made with{" "}
               <motion.span
                 animate={{ scale: [1, 1.2, 1] }}
@@ -278,7 +276,7 @@ const Footer = () => {
               </motion.span>
               and lots of coffee
             </p>
-            <div className="flex items-center justify-center space-x-2 sm:space-x-4 text-xs sm:text-sm text-gray-500">
+            <div className="flex items-center justify-center md:justify-end gap-4 text-xs md:text-sm text-gray-500">
               <a href="#privacy" className="hover:text-purple-400 transition-colors">
                 Privacy Policy
               </a>
@@ -286,8 +284,8 @@ const Footer = () => {
               <a href="#terms" className="hover:text-purple-400 transition-colors">
                 Terms of Service
               </a>
-              <span className="hidden sm:inline">•</span>
-              <a href="#sitemap" className="hover:text-purple-400 transition-colors hidden sm:inline">
+              <span>•</span>
+              <a href="#sitemap" className="hover:text-purple-400 transition-colors">
                 Sitemap
               </a>
             </div>
@@ -295,8 +293,9 @@ const Footer = () => {
         </motion.div>
       </div>
 
+      {/* Floating Badge */}
       <motion.div
-        className="absolute top-4 sm:top-8 right-4 sm:right-8 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs text-purple-300"
+        className="absolute top-8 right-8 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full px-4 py-2 text-xs text-purple-300 flex items-center gap-2"
         animate={{
           y: [-5, 5, -5],
           rotate: [-1, 1, -1],
@@ -307,7 +306,8 @@ const Footer = () => {
           ease: "easeInOut",
         }}
       >
-        ✨ Available for hire
+        <FaCheckCircle className="w-4 h-4" />
+        Available for hire
       </motion.div>
     </footer>
   )

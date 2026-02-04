@@ -1,7 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import type React from "react"
-
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaPaperPlane, FaBolt, FaCheckCircle, FaCode, FaRocket, FaStar, FaLightbulb, FaGem, FaFire } from "react-icons/fa"
 import { useState } from "react"
 
 const Contact = () => {
@@ -27,14 +27,15 @@ const Contact = () => {
   return (
     <section id="contact" className="relative py-24 px-6 md:px-20 bg-black overflow-hidden">
       {/* Animated Stars Background */}
-      <div className="absolute inset-0">
-        {[...Array(100)].map((_, i) => (
+      <div className="absolute inset-0 will-change-opacity">
+        {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              willChange: "opacity",
             }}
             animate={{
               opacity: [0.2, 1, 0.2],
@@ -50,8 +51,8 @@ const Contact = () => {
       </div>
 
       {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+      <div className="absolute inset-0 pointer-events-none will-change-transform">
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 rounded-full"
@@ -61,6 +62,7 @@ const Contact = () => {
               }, transparent)`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              willChange: "transform, opacity",
             }}
             animate={{
               y: [-20, -100, -20],
@@ -122,46 +124,58 @@ const Contact = () => {
             <div className="space-y-6">
               {[
                 {
-                  icon: "📧",
+                  Icon: FaEnvelope,
                   title: "Email",
                   value: "rafay8924@gmail.com",
                   description: "Drop me a line anytime",
+                  color: "from-pink-500 to-pink-600",
                 },
                 {
-                  icon: "📱",
+                  Icon: FaPhone,
                   title: "Phone",
                   value: "+92 312 1255002",
                   description: "Call for urgent projects",
+                  color: "from-blue-500 to-blue-600",
                 },
                 {
-                  icon: "📍",
+                  Icon: FaMapMarkerAlt,
                   title: "Location",
                   value: "Karachi, Pakistan",
-                  description: "Available for remote work",
+                  description: "Available for remote and onsite work",
+                  color: "from-red-500 to-red-600",
                 },
                 {
-                  icon: "⏰",
+                  Icon: FaClock,
                   title: "Response Time",
                   value: "Within 24 hours",
                   description: "Quick turnaround guaranteed",
+                  color: "from-orange-500 to-orange-600",
                 },
               ].map((contact, index) => (
                 <motion.div
                   key={index}
-                  className="group relative p-6 bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-md rounded-2xl border border-purple-500/30 hover:border-pink-500/50 transition-all duration-300"
+                  className="group relative overflow-hidden rounded-2xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
                   whileHover={{ scale: 1.02, y: -5 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="relative flex items-center space-x-4">
-                    <div className="text-3xl">{contact.icon}</div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-white mb-1">{contact.title}</h3>
-                      <p className="text-purple-300 font-medium">{contact.value}</p>
-                      <p className="text-gray-400 text-sm">{contact.description}</p>
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg" />
+                  <div className="relative p-6 bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-xl">
+                    <div className="flex items-center space-x-4">
+                      <motion.div
+                        className={`p-3 rounded-lg bg-gradient-to-br ${contact.color} shadow-lg`}
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <contact.Icon className="w-6 h-6 text-white" />
+                      </motion.div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-1">{contact.title}</h3>
+                        <p className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-semibold text-sm">{contact.value}</p>
+                        <p className="text-gray-400 text-sm">{contact.description}</p>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -177,22 +191,22 @@ const Contact = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <h3 className="text-2xl font-bold text-white mb-6">Connect With Me</h3>
-              <div className="flex space-x-4">
+              <div className="flex space-x-6">
                 {[
-                  { name: "GitHub", icon: "🐙", color: "from-gray-600 to-gray-800" },
-                  { name: "LinkedIn", icon: "💼", color: "from-blue-600 to-blue-800" },
-                  { name: "Twitter", icon: "🐦", color: "from-cyan-600 to-cyan-800" },
-                  { name: "Instagram", icon: "📸", color: "from-pink-600 to-purple-800" },
+                  { name: "GitHub", Icon: FaGithub, color: "from-gray-600 to-gray-800", url: "https://github.com/rafayali123" },
+                  { name: "LinkedIn", Icon: FaLinkedin, color: "from-blue-600 to-blue-800", url: "https://www.linkedin.com/in/syed-abdul-rafay-ali-8272b12a8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
-                    href="#"
-                    className={`group relative p-4 bg-gradient-to-br ${social.color} rounded-xl hover:scale-110 transition-all duration-300`}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group relative p-4 bg-gradient-to-br ${social.color} rounded-xl hover:scale-110 transition-all duration-300 shadow-lg`}
                     whileHover={{ y: -5 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <div className="text-2xl">{social.icon}</div>
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    <social.Icon className="text-2xl text-white" />
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       {social.name}
                     </div>
                   </motion.a>
@@ -275,14 +289,12 @@ const Contact = () => {
 
                 <motion.button
                   type="submit"
-                  className="w-full py-4 px-8 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                  className="w-full py-4 px-8 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="flex items-center justify-center space-x-2">
-                    <span>Send Message</span>
-                    <span>🚀</span>
-                  </span>
+                  <span>Send Message</span>
+                  <FaPaperPlane className="w-5 h-5" />
                 </motion.button>
               </div>
             </motion.form>
@@ -292,7 +304,7 @@ const Contact = () => {
         {/* Floating Achievement Badges */}
         <div className="absolute top-20 right-10 hidden lg:block">
           <motion.div
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2"
             animate={{
               y: [0, -10, 0],
               rotate: [0, 5, 0],
@@ -303,13 +315,14 @@ const Contact = () => {
               ease: "easeInOut",
             }}
           >
-            ⚡ Quick Response
+            <FaBolt className="w-4 h-4" />
+            <span>Quick Response</span>
           </motion.div>
         </div>
 
         <div className="absolute bottom-20 left-10 hidden lg:block">
           <motion.div
-            className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
+            className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2"
             animate={{
               y: [0, -15, 0],
               rotate: [0, -5, 0],
@@ -321,7 +334,8 @@ const Contact = () => {
               delay: 1,
             }}
           >
-            🌟 Available 24/7
+            <FaCheckCircle className="w-4 h-4" />
+            <span>Available 24/7</span>
           </motion.div>
         </div>
       </div>

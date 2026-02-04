@@ -1,86 +1,26 @@
-// import Navbar from "./Components/Navbar/Navbar"
-// import Hero from "./Components/Hero/Hero"
-// import About from "./Pages/About/About"
-// import Skills from "./Pages/Skills/Skills"
-// import Projects from "./Pages/Projects/Projects"
-// import Certifications from "./Pages/Certifications/Certifications"
-// import Contact from "./Pages/Contact/Contact"
-// import Footer from "./Components/Footer/Footer"
-
-// export default function Page() {
-//   return (
-//     <main className="scroll-smooth">
-//       <Navbar />
-//       <section id="home" className="scroll-mt-20">
-//         <Hero />
-//       </section>
-//       <section id="about" className="scroll-mt-20">
-//         <About />
-//       </section>
-//       <section id="skills" className="scroll-mt-20">
-//         <Skills />
-//       </section>
-//       <section id="projects" className="scroll-mt-20">
-//         <Projects />
-//       </section>
-//       <section id="certifications" className="scroll-mt-20">
-//         <Certifications />
-//       </section>
-//       <section id="contact" className="scroll-mt-20">
-//         <Contact />
-//       </section>
-//       <Footer />
-//     </main>
-//   )
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { Routes, Route } from "react-router-dom"
 import Navbar from "./Components/Navbar/Navbar"
-import Hero from "./Components/Hero/Hero"
+import Footer from "./Components/Footer/Footer"
+import Home from "./Pages/Home/Home"
 import About from "./Pages/About/About"
 import Skills from "./Pages/Skills/Skills"
 import Projects from "./Pages/Projects/Projects"
 import Certifications from "./Pages/Certifications/Certifications"
 import Contact from "./Pages/Contact/Contact"
-import Footer from "./Components/Footer/Footer"
 
-export default function Page() {
+export default function App() {
   return (
-    <main className="scroll-smooth">
+    <>
       <Navbar />
-      <section id="home" className="scroll-mt-20">
-        <Hero />
-      </section>
-      <section id="about" className="scroll-mt-20">
-        <About />
-      </section>
-      <section id="skills" className="scroll-mt-20">
-        <Skills />
-      </section>
-      <section id="projects" className="scroll-mt-20">
-        <Projects />
-      </section>
-      <section id="certifications" className="scroll-mt-20">
-        <Certifications />
-      </section>
-      <section id="contact" className="scroll-mt-20">
-        <Contact />
-      </section>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/certifications" element={<Certifications />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
       <Footer />
-    </main>
+    </>
   )
 }

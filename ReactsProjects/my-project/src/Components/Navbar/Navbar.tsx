@@ -1,36 +1,32 @@
 "use client"
 import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { FaBars, FaTimes } from "react-icons/fa"
 import { motion, AnimatePresence } from "framer-motion"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About", path: "#about" },
-    { name: "Skills", path: "#skills" },
-    { name: "Projects", path: "#projects" },
-    { name: "Certifications", path: "#certifications" },
-    { name: "Contact", path: "#contact" },
+    { name: "About", path: "/about" },
+    { name: "Skills", path: "/skills" },
+    { name: "Projects", path: "/projects" },
+    { name: "Certifications", path: "/certifications" },
+    { name: "Contact", path: "/contact" },
   ]
 
   const handleNavClick = (path: string) => {
-    if (path.startsWith("#")) {
-      const element = document.querySelector(path)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
-      }
-    } else {
-      window.location.href = path
-    }
+    navigate(path)
+    setTimeout(() => window.scrollTo(0, 0), 0)
     setIsOpen(false)
   }
 
   return (
     <>
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {[...Array(30)].map((_, i) => (
+      <div className="fixed inset-0 pointer-events-none z-0 will-change-transform">
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute bg-white rounded-full opacity-30"
@@ -39,6 +35,7 @@ const Navbar = () => {
               height: `${Math.random() * 2 + 1}px`,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
+              willChange: "transform, opacity",
             }}
             animate={{
               y: ["0%", "100vh"],
@@ -133,12 +130,7 @@ const Navbar = () => {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="fixed top-0 right-0 h-screen bg-gradient-to-br from-purple-900/95 via-black/95 to-blue-900/95 backdrop-blur-md z-50 overflow-hidden
-                           w-full max-w-xs
-                           xs:w-80 xs:max-w-sm
-                           sm:w-96 sm:max-w-md
-                           md:w-80 md:max-w-sm
-                           lg:w-96 lg:max-w-md"
+                className="fixed top-0 right-0 h-screen bg-gradient-to-br from-purple-900/95 via-black/95 to-blue-900/95 backdrop-blur-md z-50 overflow-y-auto w-full sm:w-96 md:max-w-sm"
               >
                 {/* Floating particles - Responsive count */}
                 {[...Array(window.innerWidth < 640 ? 10 : 15)].map((_, i) => (
@@ -164,18 +156,18 @@ const Navbar = () => {
                 ))}
 
                 {/* Sidebar Content - Fully Responsive */}
-                <div className="h-full flex flex-col justify-between p-4 sm:p-6 md:p-4 lg:p-6">
+                <div className="h-full flex flex-col justify-between p-6 sm:p-8">
                   {/* Close Button - Responsive */}
-                  <div className="flex justify-end mb-2 sm:mb-4">
+                  <div className="flex justify-end mb-6">
                     <motion.button
                       onClick={() => setIsOpen(false)}
-                      className="text-xl sm:text-2xl text-purple-400 hover:text-pink-400 transition-colors duration-300 p-1 sm:p-2"
+                      className="text-2xl text-purple-400 hover:text-pink-400 transition-colors duration-300 p-2 rounded-lg hover:bg-purple-500/10"
                       whileHover={{
-                        scale: 1.2,
+                        scale: 1.15,
                         rotate: 90,
                         textShadow: "0 0 15px rgba(168, 85, 247, 0.8)",
                       }}
-                      whileTap={{ scale: 0.8 }}
+                      whileTap={{ scale: 0.9 }}
                     >
                       <FaTimes />
                     </motion.button>
@@ -186,50 +178,48 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-center mb-4 sm:mb-6 md:mb-8 px-2"
+                    className="text-center mb-10 px-2"
                   >
-                    <h2 className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 bg-clip-text text-transparent mb-2 leading-tight break-words">
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 bg-clip-text text-transparent mb-3 leading-tight">
                       Syed Abdul Rafay Ali
                     </h2>
-                    <div className="space-y-1">
-                      <p className="text-purple-300 text-xs sm:text-sm flex items-center justify-center gap-1 flex-wrap">
-                        <span className="text-yellow-400">⭐</span> 
-                        <span className="break-words">Full Stack Developer</span>
+                    <div className="space-y-2">
+                      <p className="text-purple-300 text-sm font-semibold flex items-center justify-center gap-2">
+                        <span>💼</span>
+                        Full Stack Developer
                       </p>
-                      <p className="text-purple-300 text-xs leading-tight px-1 break-words">
+                      <p className="text-purple-200 text-xs leading-relaxed">
                         Full Stack Developer & AI Engineer
                       </p>
                     </div>
                   </motion.div>
 
                   {/* Navigation Links - Responsive Spacing */}
-                  <div className="flex-1 flex flex-col justify-center space-y-2 sm:space-y-3 md:space-y-4 px-2">
+                  <div className="flex-1 flex flex-col justify-center space-y-4">
                     {navLinks.map((link, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.08 + 0.2 }}
+                        transition={{ delay: i * 0.1 + 0.2 }}
                       >
-                        <button
+                        <motion.button
                           onClick={() => handleNavClick(link.path)}
-                          className="w-full text-sm sm:text-base md:text-lg font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-all duration-300 py-2 sm:py-3 px-3 sm:px-4 rounded-lg hover:bg-purple-800/20 text-center border border-transparent hover:border-purple-500/30 min-h-[40px] sm:min-h-[48px] flex items-center justify-center"
+                          className="w-full text-lg font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-purple-500/10 border border-transparent hover:border-purple-400/50 min-h-[50px] flex items-center justify-center"
+                          whileHover={{
+                            textShadow: "0 0 20px rgba(168, 85, 247, 0.6)",
+                            boxShadow: "0 0 20px rgba(168, 85, 247, 0.2)",
+                          }}
+                          whileTap={{ scale: 0.95 }}
                         >
-                          <motion.span
-                            whileHover={{
-                              textShadow: "0 0 15px rgba(168, 85, 247, 0.6)",
-                            }}
-                            className="block truncate"
-                          >
-                            {link.name}
-                          </motion.span>
-                        </button>
+                          {link.name}
+                        </motion.button>
                       </motion.div>
                     ))}
                   </div>
 
                   {/* Footer space - Responsive */}
-                  <div className="h-2 sm:h-4"></div>
+                  <div className="h-4"></div>
                 </div>
               </motion.div>
             </>

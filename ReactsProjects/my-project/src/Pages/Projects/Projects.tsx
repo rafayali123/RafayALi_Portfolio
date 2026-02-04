@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
+import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaCar, FaBook, FaCheckCircle, FaChartBar, FaCog, FaTrophy } from "react-icons/fa"
+import { SiReact, SiTypescript } from "react-icons/si"
 
 const projects = [
   {
@@ -12,8 +14,10 @@ const projects = [
     tech: ["React", "Node.js", "MongoDB", "Express", "TailwindCSS", "Stripe"],
     status: "Completed",
     category: "Full Stack",
-    link: "#",
+    github: "#",
+    live: "#",
     image: "/modern-car-ecommerce-website-dashboard.png",
+    icon: FaCar,
   },
   {
     name: "Scholar Link Manager",
@@ -23,8 +27,10 @@ const projects = [
     tech: ["Spring MVC", "Java", "MySQL", "Bootstrap", "Thymeleaf"],
     status: "Completed",
     category: "Backend",
-    link: "#",
+    github: "#",
+    live: "#",
     image: "/educational-resource-management-dashboard.png",
+    icon: FaBook,
   },
   {
     name: "Portfolio Website",
@@ -34,8 +40,10 @@ const projects = [
     tech: ["React", "Next.js", "Framer Motion", "TailwindCSS", "TypeScript"],
     status: "In Progress",
     category: "Frontend",
-    link: "#",
+    github: "#",
+    live: "#",
     image: "/futuristic-space-themed-portfolio-website.png",
+    icon: SiReact,
   },
   {
     name: "TodoList App",
@@ -45,8 +53,10 @@ const projects = [
     tech: ["React", "TypeScript", "Local Storage", "CSS3", "React DnD"],
     status: "Completed",
     category: "Frontend",
-    link: "#",
+    github: "#",
+    live: "#",
     image: "/modern-todo-list-app-interface.png",
+    icon: FaCheckCircle,
   },
 ]
 
@@ -82,20 +92,23 @@ const FloatingParticles = () => {
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-30"
+          className="absolute w-2 h-2 rounded-full"
           style={{
+            background: `linear-gradient(45deg, ${
+              i % 3 === 0 ? "#8B5CF6" : i % 3 === 1 ? "#EC4899" : "#06B6D4"
+            }, transparent)`,
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
             y: [-20, -100, -20],
-            x: [-10, 10, -10],
-            opacity: [0.3, 0.8, 0.3],
+            x: [0, Math.random() * 100 - 50, 0],
+            opacity: [0, 1, 0],
           }}
           transition={{
             duration: Math.random() * 10 + 10,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            delay: Math.random() * 5,
           }}
         />
       ))}
@@ -105,168 +118,208 @@ const FloatingParticles = () => {
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>("All")
+
+  const categories = ["All", "Full Stack", "Frontend", "Backend"]
+  const filteredProjects = selectedCategory === "All" ? projects : projects.filter(p => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="relative py-24 px-6 md:px-20 bg-black text-white overflow-hidden">
+    <section className="relative min-h-screen py-20 px-6 md:px-12 bg-black text-white overflow-hidden">
       <AnimatedStars />
       <FloatingParticles />
 
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8 }}
         >
           <motion.h2
-            className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            My Projects
+            Featured Projects
           </motion.h2>
           <motion.div
-            className="w-32 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full"
+            className="w-24 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto rounded-full mb-6"
             initial={{ width: 0 }}
-            whileInView={{ width: 128 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
+            whileInView={{ width: 96 }}
+            transition={{ duration: 1, delay: 0.3 }}
           />
           <motion.p
-            className="text-gray-300 text-lg mt-6 max-w-2xl mx-auto"
+            className="text-gray-300 text-lg max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Explore my journey through code, creativity, and innovation
+            Explore my latest work showcasing modern technologies and creative solutions
           </motion.p>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+        {/* Category Filter */}
+        <motion.div
+          className="flex justify-center gap-4 mb-12 flex-wrap"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          {categories.map((cat) => (
+            <motion.button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
+                selectedCategory === cat
+                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/50"
+                  : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border border-gray-600/30"
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {cat}
+            </motion.button>
+          ))}
+        </motion.div>
+
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={index}
-              className="relative group"
+              className="group relative"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
               onHoverStart={() => setHoveredProject(index)}
               onHoverEnd={() => setHoveredProject(null)}
             >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+              {/* Glow Background */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg" />
 
+              {/* Card */}
               <motion.div
-                className="relative bg-black/80 backdrop-blur-xl p-8 rounded-3xl border border-white/10 overflow-hidden"
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.3 }}
+                className="relative h-full bg-black/80 backdrop-blur-xl rounded-2xl border border-gray-700/50 group-hover:border-purple-500/50 overflow-hidden transition-all duration-300"
+                whileHover={{ y: -8 }}
               >
-                <div className="relative mb-6 overflow-hidden rounded-2xl">
+                {/* Project Image */}
+                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-purple-900/20 to-pink-900/20">
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.name}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-                  <motion.div
-                    className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
-                      project.status === "Completed"
-                        ? "bg-green-500/20 text-green-400 border border-green-400/30"
-                        : "bg-yellow-500/20 text-yellow-400 border border-yellow-400/30"
-                    }`}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.2 + 0.5 }}
-                  >
-                    {project.status}
-                  </motion.div>
+                  {/* Status & Category Badges */}
+                  <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+                    <motion.div
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm ${
+                        project.status === "Completed"
+                          ? "bg-green-500/20 text-green-300 border border-green-400/50"
+                          : "bg-yellow-500/20 text-yellow-300 border border-yellow-400/50"
+                      }`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {project.status}
+                    </motion.div>
+                    <motion.div
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-400/50 backdrop-blur-sm"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      {project.category}
+                    </motion.div>
+                  </div>
 
+                  {/* Icon */}
                   <motion.div
-                    className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-400/30"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.2 + 0.7 }}
+                    className="absolute bottom-4 left-4 text-white text-3xl bg-gradient-to-br from-purple-600 to-pink-600 p-3 rounded-lg shadow-lg"
+                    animate={{ y: hoveredProject === index ? -5 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {project.category}
+                    <project.icon size={28} />
                   </motion.div>
                 </div>
 
-                <div className="space-y-4">
-                  <motion.h3
-                    className="text-2xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+                {/* Content */}
+                <div className="p-6 space-y-4">
+                  <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.2 + 0.3 }}
+                    transition={{ delay: 0.1 }}
                   >
-                    {project.name}
-                  </motion.h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                      {project.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      {hoveredProject === index ? project.fullDescription : project.description}
+                    </p>
+                  </motion.div>
 
-                  <motion.p
-                    className="text-gray-300 leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: index * 0.2 + 0.5 }}
-                  >
-                    {hoveredProject === index ? project.fullDescription : project.description}
-                  </motion.p>
-
+                  {/* Tech Stack */}
                   <motion.div
                     className="flex flex-wrap gap-2"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2 + 0.7 }}
+                    transition={{ delay: 0.2 }}
                   >
                     {project.tech.map((tech, techIndex) => (
                       <motion.span
                         key={techIndex}
-                        className="px-3 py-1 text-xs font-medium bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 rounded-full border border-purple-400/20"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.2 }}
+                        className="px-3 py-1 text-xs font-medium bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-purple-200 rounded-full border border-purple-400/40 hover:border-purple-400/80 transition-all"
+                        whileHover={{ scale: 1.05 }}
                       >
                         {tech}
                       </motion.span>
                     ))}
                   </motion.div>
 
-                  <motion.a
-                    href={project.link}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-300 group/btn"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  {/* Action Buttons */}
+                  <motion.div
+                    className="flex gap-3 pt-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
                   >
-                    <span>View Project</span>
-                    <motion.svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      animate={{ x: hoveredProject === index ? 5 : 0 }}
-                      transition={{ duration: 0.2 }}
+                    <motion.a
+                      href={project.live}
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-300 group/btn"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </motion.svg>
-                  </motion.a>
+                      <span>Live Demo</span>
+                      <FaExternalLinkAlt className="w-4 h-4" />
+                    </motion.a>
+                    <motion.a
+                      href={project.github}
+                      className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800/60 hover:bg-gray-700 text-gray-300 hover:text-white font-semibold rounded-lg border border-gray-600/50 transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FaGithub className="w-4 h-4" />
+                    </motion.a>
+                  </motion.div>
                 </div>
 
+                {/* Glow Effect */}
                 <motion.div
-                  className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-xl"
+                  className="absolute -top-1 -right-1 w-24 h-24 bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-full blur-3xl"
                   animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.3, 1],
+                    opacity: [0.2, 0.4, 0.2],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 5,
                     repeat: Number.POSITIVE_INFINITY,
-                    delay: index * 0.5,
+                    delay: index * 0.3,
                   }}
                 />
               </motion.div>
@@ -274,37 +327,70 @@ const Projects = () => {
           ))}
         </div>
 
+        {/* Stats Section */}
         <motion.div
-          className="flex justify-center mt-16 gap-8 flex-wrap"
+          className="grid md:grid-cols-3 gap-6"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
           {[
-            { label: "Projects Completed", value: "15+" },
-            { label: "Technologies Used", value: "20+" },
-            { label: "Years Experience", value: "2+" },
+            { label: "Projects Completed", value: "15+", Icon: FaChartBar },
+            { label: "Technologies Used", value: "20+", Icon: FaCog },
+            { label: "Years of Experience", value: "2+", Icon: FaTrophy },
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-4 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10"
-              whileHover={{ scale: 1.05, y: -5 }}
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: index * 0.5,
-              }}
+              className="relative group"
+              whileHover={{ y: -5 }}
             >
-              <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {stat.value}
-              </div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur" />
+              <motion.div
+                className="relative p-6 bg-black/80 backdrop-blur-xl rounded-xl border border-gray-700/50 group-hover:border-purple-500/50 transition-all duration-300 text-center"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  delay: index * 0.5,
+                }}
+              >
+                <div className="flex justify-center mb-3">
+                  <div className="bg-gradient-to-br from-purple-600 to-pink-600 p-3 rounded-lg">
+                    <stat.Icon size={32} className="text-white" />
+                  </div>
+                </div>
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-400">{stat.label}</div>
+              </motion.div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <p className="text-gray-400 mb-6">Want to see more of my work?</p>
+          <motion.a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full transition-all duration-300"
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(168, 85, 247, 0.5)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Visit My GitHub</span>
+            <FaArrowRight className="w-4 h-4" />
+          </motion.a>
         </motion.div>
       </div>
     </section>
