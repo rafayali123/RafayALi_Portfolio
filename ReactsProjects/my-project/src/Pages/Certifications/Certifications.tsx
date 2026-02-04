@@ -260,13 +260,6 @@ const Certifications = () => {
                   ))}
                 </div>
 
-                {cert.credentialId && (
-                  <div className="mb-4 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-                    <p className="text-xs text-gray-400 mb-1">Credential ID</p>
-                    <p className="text-xs font-mono text-purple-300">{cert.credentialId}</p>
-                  </div>
-                )}
-
                 <div className="flex items-center justify-between text-sm text-gray-400">
                   <span className="flex items-center gap-1">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

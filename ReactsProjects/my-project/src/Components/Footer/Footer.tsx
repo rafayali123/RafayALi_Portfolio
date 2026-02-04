@@ -82,7 +82,7 @@ const Footer = () => {
   ]
 
   // Fixed smooth scroll function
-  const handleSmoothScroll = (event, targetHref) => {
+  const handleSmoothScroll = (event: React.MouseEvent, targetHref: string) => {
     if (targetHref && targetHref.startsWith("#")) {
       event.preventDefault()
       const element = document.querySelector(targetHref)

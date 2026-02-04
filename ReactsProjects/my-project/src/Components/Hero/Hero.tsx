@@ -96,7 +96,7 @@ const Hero = () => {
         >
           <span className="block text-lg md:text-xl text-gray-400 mb-2">Full Stack Developer & Ai Engineer</span>
           Exploring the{" "}
-          <span className="text-purple-400 font-semibold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          <span className="font-semibold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
             Universe of Code & Creativity
           </span>
           <motion.span

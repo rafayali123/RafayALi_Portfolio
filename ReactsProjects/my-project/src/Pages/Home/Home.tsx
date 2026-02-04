@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-import { FaStar, FaCode, FaRocket, FaLightbulb, FaGem, FaFire, FaBrain, FaCheckCircle } from "react-icons/fa"
+import { FaCode, FaRocket, FaLightbulb, FaBrain } from "react-icons/fa"
 
 const Home = () => {
   const navigate = useNavigate()

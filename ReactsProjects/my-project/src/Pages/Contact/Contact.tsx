@@ -1,7 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import type React from "react"
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaPaperPlane, FaBolt, FaCheckCircle, FaCode, FaRocket, FaStar, FaLightbulb, FaGem, FaFire } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaPaperPlane, FaBolt, FaCheckCircle } from "react-icons/fa"
 import { useState } from "react"
 
 const Contact = () => {
