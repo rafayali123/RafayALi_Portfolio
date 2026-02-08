@@ -381,7 +381,7 @@ const Projects = () => {
         >
           <p className="text-gray-400 mb-6">Want to see more of my work?</p>
           <motion.a
-            href="https://github.com"
+            href="https://github.com/rafayali123"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full transition-all duration-300"
