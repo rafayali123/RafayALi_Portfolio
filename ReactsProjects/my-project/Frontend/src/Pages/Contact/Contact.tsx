@@ -374,7 +374,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-20 left-10 hidden lg:block">
+        <div className="absolute bottom-32 left-10 hidden lg:block">
           <motion.div
             className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg flex items-center gap-2"
             animate={{

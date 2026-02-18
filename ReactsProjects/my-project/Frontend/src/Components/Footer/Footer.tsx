@@ -1,5 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
+import { Link, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 import {
   FaGithub,
   FaLinkedin,
@@ -13,6 +15,15 @@ import {
 } from "react-icons/fa"
 
 const Footer = () => {
+  const location = useLocation()
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [location.pathname])
   // Animated stars
   const stars = Array.from({ length: 50 }, (_, i) => ({
     id: i,
@@ -53,13 +64,13 @@ const Footer = () => {
     },
   ]
 
-  // Navigation links - These will scroll to sections on the same page
+  // Navigation links - These will route to different pages
   const quickLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", path: "/about" },
+    { name: "Skills", path: "/skills" },
+    { name: "Projects", path: "/projects" },
+    { name: "Certifications", path: "/certifications" },
+    { name: "Contact", path: "/contact" },
   ]
 
   // Contact information with working links
@@ -80,20 +91,6 @@ const Footer = () => {
       href: "https://maps.google.com/?q=Karachi,Pakistan",
     },
   ]
-
-  // Fixed smooth scroll function
-  const handleSmoothScroll = (event: React.MouseEvent, targetHref: string) => {
-    if (targetHref && targetHref.startsWith("#")) {
-      event.preventDefault()
-      const element = document.querySelector(targetHref)
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-      }
-    }
-  }
 
   return (
     <footer className="relative bg-black border-t border-purple-500/20 overflow-hidden">
@@ -193,14 +190,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <motion.li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                  <Link
+                    to={link.path}
                     className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center group text-sm cursor-pointer"
                   >
                     <motion.span className="w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 mr-3 group-hover:w-4 transition-all duration-300" />
                     {link.name}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>

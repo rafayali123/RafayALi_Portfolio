@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaCar, FaBook, FaCheckCircle, FaChartBar, FaCog, FaTrophy } from "react-icons/fa"
+import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaCar, FaBook, FaCheckCircle, FaChartBar, FaCog, FaTrophy, FaFileAlt, FaDollarSign, FaTint } from "react-icons/fa"
 import { SiReact, SiTypescript } from "react-icons/si"
 
 const projects = [
@@ -14,49 +14,49 @@ const projects = [
     tech: ["React", "Node.js", "MongoDB", "Express", "TailwindCSS", "Stripe"],
     status: "Completed",
     category: "Full Stack",
-    github: "#",
+    github: "https://github.com/rafayali123/CarzXpress",
     live: "#",
-    image: "/modern-car-ecommerce-website-dashboard.png",
+    image: "/Images/Gemini_Generated_Image_tc9vj4tc9vj4tc9v.png",
     icon: FaCar,
   },
   {
-    name: "Scholar Link Manager",
-    description: "Spring MVC CRUD project for managing educational resources.",
+    name: "Loan Management System",
+    description: "Full-stack loan management platform with HTML/CSS/JS frontend and Java backend with multithreading and unit testing.",
     fullDescription:
-      "An educational resource management system built with Spring MVC architecture, featuring user authentication, resource categorization, advanced search capabilities, and collaborative learning tools.",
-    tech: ["Spring MVC", "Java", "MySQL", "Bootstrap", "Thymeleaf"],
+      "A comprehensive loan management system featuring a responsive HTML/CSS/JavaScript frontend, and a robust Java Spring Boot backend with multithreading for concurrent loan processing, advanced unit testing for code quality assurance, loan approval workflows, payment tracking, and comprehensive reporting capabilities with secure user authentication.",
+    tech: ["HTML", "CSS", "JavaScript", "Java", "Spring Boot", "MONGODB", "Multithreading", "JUnit"],
     status: "Completed",
-    category: "Backend",
+    category: "Full Stack",
     github: "#",
     live: "#",
-    image: "/educational-resource-management-dashboard.png",
-    icon: FaBook,
+    image: "/Images/Gemini_Generated_Image_p3mrtsp3mrtsp3mr.png",
+    icon: FaDollarSign,
   },
   {
-    name: "Portfolio Website",
-    description: "Personal portfolio with universe/futuristic theme and animations.",
+    name: "Water App",
+    description: "Full-stack water management application with mobile (Flutter), web (React), and backend (NestJS).",
     fullDescription:
-      "A stunning personal portfolio website featuring cosmic animations, interactive elements, responsive design, and modern web technologies to showcase projects and skills in an engaging way.",
-    tech: ["React", "Next.js", "Framer Motion", "TailwindCSS", "TypeScript"],
+      "A comprehensive water management solution featuring a Flutter mobile application for on-the-go access, a responsive React website with TailwindCSS for desktop users, and a robust NestJS backend API. Includes real-time water usage tracking, analytics dashboard, consumption reports, and user management with secure authentication.",
+    tech: ["Flutter", "React", "TailwindCSS", "NestJS", "TypeScript", "MongoDB" ,"Zustand"],
     status: "In Progress",
-    category: "Frontend",
-    github: "#",
+    category: "Full Stack",
+    github: "https://github.com/wenawa/waterapp",
     live: "#",
-    image: "/futuristic-space-themed-portfolio-website.png",
-    icon: SiReact,
+    image: "/Images/Gemini_Generated_Image_qln0j4qln0j4qln0.png",
+    icon: FaTint,
   },
   {
-    name: "TodoList App",
-    description: "A simple TodoList application built with React and TypeScript.",
+    name: "Resume Builder",
+    description: "Full-stack resume builder with MERN architecture for creating professional resumes.",
     fullDescription:
-      "A feature-rich task management application with drag-and-drop functionality, priority levels, due dates, categories, local storage persistence, and a clean, intuitive user interface.",
-    tech: ["React", "TypeScript", "Local Storage", "CSS3", "React DnD"],
+      "A comprehensive full-stack resume creation platform featuring user authentication, multiple professional templates, real-time preview, PDF/DOC export capabilities, and cloud storage. Built with React frontend for intuitive UI, Node.js/Express backend for API management, and MongoDB for secure user data persistence.",
+    tech: ["React", "Node.js", "Express", "MongoDB", "TypeScript", "TailwindCSS", "PDF Export"],
     status: "Completed",
-    category: "Frontend",
-    github: "#",
+    category: "Full Stack",
+    github: "https://github.com/rafayali123/ResumeProject",
     live: "#",
-    image: "/modern-todo-list-app-interface.png",
-    icon: FaCheckCircle,
+    image: "/Images/Gemini_Generated_Image_hckhpahckhpahckh.png",
+    icon: FaFileAlt,
   },
 ]
 
